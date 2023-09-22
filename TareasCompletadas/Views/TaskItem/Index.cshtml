@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TareasCompletadas.Models.TaskItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <a asp-action="Create" class="btn btn-outline-success m-4">Agregar Tarea</a>
+    <a asp-action="Historial" class="btn btn-outline-dark">Historial</a>
+<div class="container align-items-center">
+
+    <div class="row align-items-start">
+        <div class="col border border-3 border-dark rounded m-2">
+            <h2 class="text-center">Tareas en proceso</h2>
+                <div class="row mt-3">
+                    @foreach (var item in ViewBag.TareasIncompletas)
+                    {
+                        <div class="col-md-6 col-lg-6 col-xl-6 mb-4">
+                            <div class="card text-center border border-2 border-primary shadow-0 ">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Titulo</h5>
+                                    <p class="card-text">@item.Descripcion</p>
+                                    <i class="bi bi-hourglass-split" style="font-size: 3rem; color:slategrey"></i>
+                                    <div class="mt-3">
+                                        <a asp-controller="TaskItem" asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-primary">Ver</a>
+                                        <a asp-controller="TaskItem" asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger">Eliminar</a>
+                                        <a asp-controller="TaskItem" asp-action="ImprimirPDF" asp-route-id="@item.Id" type="button" class="btn btn-success" style="margin-top:5px">Descargar PDF</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">Fecha limite: @item.FechaEntrega</div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+        </div>
+        <div class="col border border-3 border-dark rounded m-2">
+            <h2 class="text-center">Tareas completadas</h2>
+            <div class="row mt-3">
+                @foreach (var item in ViewBag.TareasCompletadas)
+                {
+                    <div class="col-md-6 col-lg-6 col-xl-6 mb-4">
+                        <div class="card text-center border border-2 border-success shadow-0 ">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Titulo</h5>
+                                <p class="card-text">@item.Descripcion</p>
+                                <i class="bi bi-clipboard-check" style="font-size: 3rem; color:forestgreen"></i>
+                                <div class="mt-3">
+                                    <a asp-controller="TaskItem" asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger">Eliminar</a>
+                                    <a asp-controller="TaskItem" asp-action="ImprimirPDF" asp-route-id="@item.Id" type="button" class="btn btn-success">Descargar PDF</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">Entregado: @item.FechaEntrega</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

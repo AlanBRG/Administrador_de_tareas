@@ -1,0 +1,57 @@
+﻿@model TareasCompletadas.Models.TaskItem
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<section class="align-items-center">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card-body p-md-5 mx-md-4 border border-dark rounded">
+
+                <div class="text-center">
+                    <i class="bi bi-book" style="font-size: 6rem; color: orange"></i>
+                    <h4 class="mt-1 mb-5 pb-1">Editar tarea</h4>
+                </div>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group mt-3">
+                        <label asp-for="Titulo" class="form-label"></label>
+                        <input asp-for="Titulo" class="form-control" />
+                        <span asp-validation-for="Titulo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label asp-for="Descripcion" class="form-label"></label>
+                        <textarea asp-for="Descripcion" class="form-control"></textarea>
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label asp-for="FechaEntrega" class="form-label">Fecha de entrega</label>
+                        <input asp-for="FechaEntrega" class="form-control" />
+                        <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+                    </div>
+                    <div class="form-check form-switch mt-3">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsCompleted" /> Completada
+                        </label>
+                    </div>
+                    <div class="form-group mt-4 text-center">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-secondary">Vista principal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
